@@ -1,45 +1,41 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, map, Observable, of, tap} from 'rxjs';
-import {ElementMain} from './home.type';
+import {BehaviorSubject, catchError, map, Observable, of, tap} from 'rxjs';
+import {PokemonDto, PokemonResponseDto} from './home.type';
+import {HttpClient} from '@angular/common/http';
+import {PokemonApiService} from '../../services/pokemon-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
-  elementSubject$ = new BehaviorSubject<ElementMain[]>([]);
+  private url = 'https://pokeapi.co/api/v2/';
 
-  constructor() {
+  elementSubject$ = new BehaviorSubject<PokemonDto[]>([]);
+
+  constructor(
+    private service: PokemonApiService
+  ) {
   }
 
-  get elements$(): Observable<ElementMain[]> {
+  get elements$(): Observable<PokemonDto[]> {
     return this.elementSubject$.asObservable();
   }
 
 
   get(): Observable<boolean> {
 
-    return of([
-      {
-        id: 1,
-        name: 'Element 1',
-        color: 'red',
-        category: 'category 1',
-        price: 100
-      },
-      {
-        id: 2,
-        name: 'Element 2',
-        color: 'blue',
-        category: 'category 2',
-        price: 200
-      }
-    ] as ElementMain[])
+    return this.service.findAll()
       .pipe(
         tap(elements => {
           this.elementSubject$.next(elements);
         }),
-        map(() => true)
+        map(() => true),
+        catchError(() => {
+          // toast para indicar que no se pudo obtener la lista
+          alert('No se pudo obtener la lista de pokemones')
+          return of(true);
+        })
       );
   }
 

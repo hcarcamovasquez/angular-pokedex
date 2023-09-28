@@ -1,7 +1,17 @@
-export interface ElementMain {
-    id: number;
-    name: string;
-    color: string;
-    category: string;
-    price: number;
+
+export interface PokemonDto {
+  name: string;
+  img: string;
+}
+
+export interface PokemonResultDto {
+  name: string;
+  url: string;
+}
+
+export interface PokemonResponseDto {
+  count: number;
+  next: string;
+  previous?: string;
+  results: PokemonResultDto[];
 }

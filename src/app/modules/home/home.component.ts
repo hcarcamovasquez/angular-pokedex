@@ -7,9 +7,7 @@ import {HomeService} from './home.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(
-    protected readonly service: HomeService
-  ) {
+  constructor() {
   }
 
   ngOnInit(): void {

@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {HomeComponent} from './home.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeResolver} from './home.resolver';
+import {PokemonTableModule} from './pokemon-table/pokemon-table.module';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    PokemonTableModule
   ]
 })
 export class HomeModule {
