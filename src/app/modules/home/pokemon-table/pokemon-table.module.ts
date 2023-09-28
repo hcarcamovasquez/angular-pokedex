@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PokemonTableComponent } from './pokemon-table.component';
+import {MatButtonModule} from '@angular/material/button';
+import {RouterLinkWithHref} from '@angular/router';
 
 
 
@@ -12,7 +14,9 @@ import { PokemonTableComponent } from './pokemon-table.component';
     PokemonTableComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatButtonModule,
+    RouterLinkWithHref
   ]
 })
 export class PokemonTableModule { }

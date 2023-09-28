@@ -32,6 +32,7 @@ export class PokemonApiService {
 
   private toPokemonDto(pokemon: any): PokemonDto {
     return {
+      id: pokemon.id,
       name: pokemon.name,
       img: pokemon?.sprites?.front_default
     } as PokemonDto;

@@ -6,6 +6,7 @@ import {RouterModule, RouterOutlet, Routes} from '@angular/router';
 import {LayoutModule} from './layout/layout.module';
 import {LayoutComponent} from './layout/layout.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
     RouterOutlet,
     LayoutModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

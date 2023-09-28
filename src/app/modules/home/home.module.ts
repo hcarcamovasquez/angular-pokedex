@@ -12,6 +12,10 @@ const routes: Routes = [
       data: HomeResolver
     },
     component: HomeComponent
+  },
+  {
+    path: 'update-pokemon',
+    loadChildren: () => import('./update-pokemon/update-pokemon.module').then(m => m.UpdatePokemonModule)
   }
 ];
 

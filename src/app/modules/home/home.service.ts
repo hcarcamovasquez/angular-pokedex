@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, catchError, map, Observable, of, tap} from 'rxjs';
-import {PokemonDto, PokemonResponseDto} from './home.type';
-import {HttpClient} from '@angular/common/http';
+import {PokemonDto} from './home.type';
 import {PokemonApiService} from '../../services/pokemon-api.service';
 
 @Injectable({
