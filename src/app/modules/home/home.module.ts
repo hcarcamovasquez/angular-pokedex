@@ -4,6 +4,7 @@ import {HomeComponent} from './home.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeResolver} from './home.resolver';
 import {PokemonTableModule} from './pokemon-table/pokemon-table.module';
+import {UpdateMoveResolver} from './update-pokemon/update-move/update-move.resolver';
 
 const routes: Routes = [
   {
