@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {combineLatest, map, Observable, switchMap} from 'rxjs';
-import {PokemonDto, PokemonMoveDto, PokemonResponseDto, PokemonResponseMoveDto} from '../modules/home/home.type';
+import {combineLatest, map, Observable, switchMap, tap} from 'rxjs';
+import {PokemonDto, EvolutionChain, PokemonMoveDto, PokemonResponseDto, PokemonResponseMoveDto} from '../modules/home/home.type';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,13 @@ export class PokemonApiService {
       );
   }
 
+  getOneEvolution(id?: number | string): Observable<EvolutionChain> {
+    return this.http.get<EvolutionChain>(typeof id === 'string' ? id : this.url.concat(`evolution-chain/${id}/`))
+      .pipe(
+        map((response) => this.toEvolutionDto(response))
+      );
+  }
+
   private toPokemonDto(pokemon: any): PokemonDto {
     return {
       id: pokemon.id,
@@ -58,6 +65,15 @@ export class PokemonApiService {
     return {
       name: move.name
     } as PokemonMoveDto;
+  }
+
+  private toEvolutionDto(evolution : any) : EvolutionChain{
+    return {
+      is_baby : evolution.chain.is_baby,
+      evolves_to : evolution.chain.evolves_to,
+      species :  evolution.chain.species
+    } as EvolutionChain;
+
   }
 
 }

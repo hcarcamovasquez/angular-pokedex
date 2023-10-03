@@ -32,3 +32,19 @@ export interface PokemonMoveDto {
   name: string;
 
 }
+
+export interface PokemonSpeciesDto { // raiz
+  name: string;
+  url : string;
+}
+
+export interface Evolution { // evolves_to
+  is_baby: boolean;
+  species: PokemonSpeciesDto;
+}
+
+export interface EvolutionChain { // chain 
+  is_baby: boolean;
+  species: PokemonSpeciesDto;
+  evolves_to: Evolution[];
+}

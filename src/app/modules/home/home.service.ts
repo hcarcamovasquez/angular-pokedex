@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, catchError, map, Observable, of, tap} from 'rxjs';
-import {PokemonDto} from './home.type';
+import {EvolutionChain, PokemonDto} from './home.type';
 import {PokemonApiService} from '../../services/pokemon-api.service';
 
 @Injectable({
@@ -12,6 +12,7 @@ export class HomeService {
 
   elementSubject$ = new BehaviorSubject<PokemonDto[]>([]);
   moveElementSubject$ = new BehaviorSubject<PokemonDto | null>(null);
+  evolutionElementSubject$ = new BehaviorSubject<EvolutionChain | null>(null); // se utiliza para emitir actualizaciones sobre los elementos
 
   constructor(
     private service: PokemonApiService
@@ -24,6 +25,10 @@ export class HomeService {
 
   get elements$(): Observable<PokemonDto[]> {
     return this.elementSubject$.asObservable();
+  }
+
+  get evolutionElement$(): Observable<EvolutionChain | null > { // metodo que expone este Subject como un Observable
+    return this.evolutionElementSubject$.asObservable(); // con esto se pueden suscribirse y actualizarse 
   }
 
 
@@ -49,6 +54,17 @@ export class HomeService {
       .pipe(
         tap(pokemon => this.moveElementSubject$.next(pokemon)),
         map(() => true),
+        catchError(() => {
+          return of(false);
+        })
+      );
+  }
+
+  getEvolution(id: number): Observable<boolean> { // llamo el servicio normalmente 
+    return this.service.getOneEvolution(id) // invocacion de servicio
+      .pipe(
+        tap(pokemon => this.evolutionElementSubject$.next(pokemon)), // aca actualizo la data del observable
+        map(() => true), // entender porque retorna un booleano.
         catchError(() => {
           return of(false);
         })

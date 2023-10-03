@@ -6,6 +6,7 @@ import {UpdateEvolutionComponent} from './update-evolution/update-evolution.comp
 import {RouterModule, Routes} from '@angular/router';
 import {UpdateMoveResolver} from './update-move/update-move.resolver';
 import {ReactiveFormsModule} from '@angular/forms';
+import { UpdateEvolutionResolver } from './update-evolution/update-evolution.resolver';
 
 const routes: Routes = [
   {
@@ -14,6 +15,13 @@ const routes: Routes = [
       data: UpdateMoveResolver
     },
     component: UpdateMoveComponent
+  },
+  {
+    path: 'evolution/:id',
+    resolve: {
+      data: UpdateEvolutionResolver
+    },
+    component: UpdateEvolutionComponent
   }
 ];
 
