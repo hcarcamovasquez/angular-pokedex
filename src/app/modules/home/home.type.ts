@@ -38,13 +38,13 @@ export interface PokemonSpeciesDto { // raiz
   url : string;
 }
 
-export interface Evolution { // evolves_to
+export interface EvolutionDto { // evolves_to
   is_baby: boolean;
   species: PokemonSpeciesDto;
 }
 
-export interface EvolutionChain { // chain 
+export interface EvolutionChainDto { // chain 
   is_baby: boolean;
   species: PokemonSpeciesDto;
-  evolves_to: Evolution[];
+  evolves_to: EvolutionDto[];
 }
